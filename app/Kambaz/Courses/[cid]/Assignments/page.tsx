@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Assignments() {
     return (
       <div id="wd-assignments">
@@ -9,29 +11,29 @@ export default function Assignments() {
           ASSIGNMENTS 40% of Total <button>+</button> </h3>
         <ul id="wd-assignment-list">
           <li className="wd-assignment-list-item">
-            <a href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Kambaz/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A1 - ENV + HTML
-            </a> 
+            </Link> 
           </li>
           <li className="wd-assignment-list-item">
             Multiple Modules | Not available until MAY 6 AT 12:00AM | <br></br>
             Due May 13 at 11:59pm | 100 points
           </li>
           <li className="wd-assignment-list-item">
-            <a href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Kambaz/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A2 - CSS + HTML
-            </a> </li>
+            </Link> </li>
           <li className="wd-assignment-list-item">
           Multiple Modules | Not available until MAY 12 AT 12:00AM | <br></br>
           Due May 20 at 11:59pm | 100 points
           </li>
           <li className="wd-assignment-list-item">
-            <a href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Kambaz/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A3 - CSS + HTML + JAVASCRIPT
-            </a> </li>
+            </Link> </li>
           <li className="wd-assignment-list-item">
           Multiple Modules | Not available until MAY 21 AT 12:00AM | <br></br>
           Due May 30 at 11:59pm | 100 points

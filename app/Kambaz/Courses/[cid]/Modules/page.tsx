@@ -38,7 +38,7 @@ export default function Modules() {
             <div className="wd-title">Week 3</div>
               <ul className="wd-lessons">
                 <li className="wd-lesson">
-                  <span className="wd-title">Don't Stress, Breath!</span>
+                  <span className="wd-title">Dont Stress Breath!</span>
                   <ul className="wd-content">
                     <li className="wd-content-item">Sayings to Keep in Mind</li>
                     <li className="wd-content-item">Everything will get figured out, don't get too overwhelmed!</li>
