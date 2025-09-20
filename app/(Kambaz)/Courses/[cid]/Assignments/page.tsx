@@ -11,7 +11,7 @@ export default function Assignments() {
           ASSIGNMENTS 40% of Total <button>+</button> </h3>
         <ul id="wd-assignment-list">
           <li className="wd-assignment-list-item">
-            <Link href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A1 - ENV + HTML
             </Link> 
@@ -21,7 +21,7 @@ export default function Assignments() {
             Due May 13 at 11:59pm | 100 points
           </li>
           <li className="wd-assignment-list-item">
-            <Link href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A2 - CSS + HTML
             </Link> </li>
@@ -30,7 +30,7 @@ export default function Assignments() {
           Due May 20 at 11:59pm | 100 points
           </li>
           <li className="wd-assignment-list-item">
-            <Link href="/Kambaz/Courses/1234/Assignments/123"
+            <Link href="/Courses/1234/Assignments/123"
                className="wd-assignment-link" >
               A3 - CSS + HTML + JAVASCRIPT
             </Link> </li>

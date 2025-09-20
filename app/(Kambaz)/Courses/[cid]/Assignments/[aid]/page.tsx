@@ -69,6 +69,7 @@ export default function AssignmentEditor() {
           <input type="date"
                 value="2000-01-21"
                 id="wd-text-fields-until"/><br/>
+          <button>Cancel</button><button>Submit</button>
       </div>
   );}
   
