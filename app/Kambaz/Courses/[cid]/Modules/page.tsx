@@ -41,7 +41,7 @@ export default function Modules() {
                   <span className="wd-title">Dont Stress Breath!</span>
                   <ul className="wd-content">
                     <li className="wd-content-item">Sayings to Keep in Mind</li>
-                    <li className="wd-content-item">Everything will get figured out, don't get too overwhelmed!</li>
+                    <li className="wd-content-item">Everything will get figured out, dont get too overwhelmed!</li>
                   </ul>
                 </li>
               </ul>

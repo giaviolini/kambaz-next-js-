@@ -3,8 +3,7 @@ export default function CourseNavigation() {
   return (
     <div id="wd-courses-navigation">
       <Link href="/Kambaz/Courses/1234/Home">Home</Link><br/>
-      <Link href="/Kambaz/Courses/1234/Modules">Modules
-        </Link><br/>
+      <Link href="/Kambaz/Courses/1234/Modules">Modules</Link><br/>
       <Link href="/Kambaz/Courses/1234/Piazza">Piazza</Link><br/>
       <Link href="/Kambaz/Courses/1234/Zoom">Zoom</Link><br/>
       <Link href="/Kambaz/Courses/1234/Assignments">Assignments</Link><br/>
