@@ -21,9 +21,9 @@ export default function Posititons() {
             </div>
         <div id="wd-css-position-fixed">
         <h2>Fixed position</h2>
-        Checkout the blue square that says "Fixed position" stuck all the way on the 
-        right and half way down the page. It doesn't scroll with the rest of the page. 
-        Its position is "Fixed".
+        Checkout the blue square that says Fixed position stuck all the way on the 
+        right and half way down the page. It doesnt scroll with the rest of the page. 
+        Its position is Fixed.
       </div>
       </div>
     );}
