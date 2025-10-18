@@ -1,4 +1,3 @@
-
 const numberArray1 = [1, 2, 4, 5, 6];
 const stringArray1 = ['string1', 'string3'];
 
