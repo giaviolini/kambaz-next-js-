@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 export default function EventObject() {
-  const [event, setEvent] = useState(null);
-  const handleClick = (e: any) => {
-    e.target = e.target.outerHTML;
-    delete e.view;
-    setEvent(e);
+  const [event, setEvent] = useState<React.MouseEvent<HTMLElement> | null>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const eventCopy = {
+      ...e,
+      target: (e.target as HTMLElement).outerHTML,
+      view: undefined,
+    };
+    setEvent(eventCopy as any);
   };
   return (
     <div>
