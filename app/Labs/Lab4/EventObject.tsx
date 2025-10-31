@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 export default function EventObject() {
   const [event, setEvent] = useState<React.MouseEvent<HTMLElement> | null>(null);
