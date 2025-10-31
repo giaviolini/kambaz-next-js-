@@ -55,7 +55,7 @@ export default function Dashboard() {
             enrollment.user === currentUser._id &&
             enrollment.course === course._id
         )).map((course: any) => (
-            <Col className="wd-dashboard-course" style={{ width: "300px" }}>
+            <Col key={course._id} className="wd-dashboard-course" style={{ width: "300px" }}>
               <Card>
                 <Link href={`/Kambaz/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark" >
