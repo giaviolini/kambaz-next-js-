@@ -1,6 +1,9 @@
 import Link from "next/link";
+import store from "./store";
+import { Provider } from "react-redux";
 export default function Labs() {
  return (
+  <Provider store={store}>
    <div id="wd-labs">
      <h1>Labs</h1>
      <ul>
@@ -16,6 +19,11 @@ export default function Labs() {
          <Link href="/Labs/Lab3" id="wd-lab3-link">
            Lab 3: JavaScript Fundamentals </Link>
        </li>
+       <li>
+         <Link href="/Labs/Lab4" id="wd-lab4-link">
+           Lab 4: React Applications</Link>
+       </li>
      </ul>
    </div>
+   </Provider>
 );}
