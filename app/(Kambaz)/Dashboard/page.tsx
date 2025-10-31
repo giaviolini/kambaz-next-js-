@@ -17,17 +17,6 @@ export default function Dashboard() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrollments } = db;
 
-  if (!currentUser) {
-    return (
-      <div className="text-center p-5">
-        <h3>Please sign in to view your dashboard</h3>
-        <Link href="/Account/Signin" className="btn btn-primary">
-          Go to Sign In
-        </Link>
-      </div>
-    );
-  }
-
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -53,11 +42,10 @@ export default function Dashboard() {
         enrollments.some(
           (enrollment) =>
             enrollment.user === currentUser._id &&
-            enrollment.course === course._id
-        )).map((course: any) => (
+            enrollment.course === course._id)).map((course: any) => (
             <Col key={course._id} className="wd-dashboard-course" style={{ width: "300px" }}>
               <Card>
-                <Link href={`/Kambaz/Courses/${course._id}/Home`}
+                <Link href={`/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark" >
                   <CardImg src="/images/reactjs.jpg" variant="top" width="100%" height={160} />
                   <CardBody className="card-body">

@@ -1,28 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+"use client"
+import { useParams } from "next/navigation";
+import Link from 'next/link';
+import AssignmentsControls from './AssignmentControls';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { BsGripVertical } from 'react-icons/bs';
+import { FaCaretDown } from "react-icons/fa";
+import { LuNotebookPen } from "react-icons/lu";
+import LessonControlButtons from '../Modules/LessonControlButtons';
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
-import { Button } from "react-bootstrap";
+import { deleteAssignment } from './reducer';
 import { useState } from "react";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const router = useRouter();
   const dispatch = useDispatch();
   
   // Get assignments from Redux store
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   
   // Filter assignments for current course
-  const courseAssignments = assignments.filter((a: any) => a.course === cid);
+  const courseAssignments = assignments.filter((assignment: any) => assignment.course === cid);
   
   // State for delete confirmation dialog
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);
 
-  const handleDeleteClick = (assignmentId: string) => {
+  const handleDeleteClick = (assignmentId: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setAssignmentToDelete(assignmentId);
     setShowDeleteDialog(true);
   };
@@ -41,36 +47,98 @@ export default function Assignments() {
   };
 
   return (
-    <div>
-      <h2>Assignments</h2>
-      
-      <Link href={`/Courses/${cid}/Assignments/new`}>
-        <Button variant="primary" className="mb-3">+ Assignment</Button>
-      </Link>
+    <div id="wd-assignments"> 
+      <AssignmentsControls />
 
-      <ul className="list-group">
-        {courseAssignments.map((assignment: any) => (
-          <li key={assignment._id} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}>
-                <strong>{assignment.title}</strong>
-              </Link>
-              <div className="text-muted small">
-                Points: {assignment.points} | 
-                Due: {assignment.endDate ? new Date(assignment.endDate).toLocaleDateString() : 'N/A'}
-              </div>
+      <br /><br />
+      
+      <ListGroup className="rounded-0" id="wd-assignments">
+        <ListGroupItem className="wd-assignments p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center">
+            <BsGripVertical className="me-2 fs-3" />
+            <FaCaretDown className="me-2"/>
+            <b>ASSIGNMENTS</b>
+            <div className="d-flex align-items-center ms-auto">
+              <p className="percent-total me-4">40% of Total</p>
             </div>
+          </div>
+          
+          <ListGroup className="wd-assignments rounded-0">
+            {courseAssignments.map((assignment: any) => (
+              <ListGroupItem key={assignment._id} className="wd-assignment p-3 ps-1 d-flex align-items-center flex-nowrap">
+                <BsGripVertical className="me-2 fs-3" /> 
+                <LuNotebookPen className="me-2 fs-4" style={{color: 'green'}}/>
+                
+                <div className="assignment-subtext">
+                  <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}
+                    className="wd-assignment-link border-0 text-dark">
+                    <b className="fs-3">{assignment.title}</b>
+                  </Link>
+                  <p> 
+                    <span className="red-module">Multiple Modules</span>
+                    {' | '}
+                    <b>Not available until</b> {assignment.release} 
+                    {' | '}
+                    <b>Due</b> {assignment.due || assignment.endDate} 
+                    {' | '}
+                    {assignment.points || 100}pts
+                  </p>
+                </div>
             
-            <Button 
-              variant="danger" 
-              size="sm"
-              onClick={() => handleDeleteClick(assignment._id)}
-            >
-              Delete
-            </Button>
-          </li>
-        ))}
-      </ul>
+                <div className="ms-auto d-flex gap-2">
+                  <Button 
+                    variant="danger" 
+                    size="sm"
+                    onClick={(e) => handleDeleteClick(assignment._id, e)}
+                  >
+                    Delete
+                  </Button>
+                  <LessonControlButtons />
+                </div>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </ListGroupItem>
+      </ListGroup>
+
+      <ListGroup className="rounded-0" id="wd-quizzes">
+        <ListGroupItem className="wd-assignments p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center">
+            <BsGripVertical className="me-2 fs-3" />
+            <FaCaretDown className="me-2"/>
+            <b>QUIZZES</b>
+            <div className="d-flex align-items-center ms-auto">
+              <p className="percent-total me-4">10% of Total</p>
+            </div>
+          </div>
+        </ListGroupItem>
+      </ListGroup>
+
+      <ListGroup className="rounded-0" id="wd-exams">
+        <ListGroupItem className="wd-assignments p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center">
+            <BsGripVertical className="me-2 fs-3" />
+            <FaCaretDown className="me-2"/>
+            <b>EXAMS</b>
+            <div className="d-flex align-items-center ms-auto">
+              <p className="percent-total me-4">20% of Total</p>
+            </div>
+          </div>
+        </ListGroupItem>
+      </ListGroup>
+
+      <ListGroup className="rounded-0" id="wd-project">
+        <ListGroupItem className="wd-assignments p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary d-flex align-items-center">
+            <BsGripVertical className="me-2 fs-3" />
+            <FaCaretDown className="me-2"/>
+            <b>PROJECT</b>
+            <div className="d-flex align-items-center ms-auto">
+              <p className="percent-total me-4">30% of Total</p>
+            </div>
+          </div>
+        </ListGroupItem>
+      </ListGroup>
 
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
@@ -98,4 +166,3 @@ export default function Assignments() {
     </div>
   );
 }
-  

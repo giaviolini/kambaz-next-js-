@@ -1,32 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import { Button, FormControl, FormSelect } from "react-bootstrap";
 export default function Profile() {
-  const [profile, setProfile] = useState<any>({});
-  const dispatch = useDispatch();
-  const router = useRouter(); // Add this
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  
-  const fetchProfile = () => {
-    if (!currentUser) {
-      router.push("./Signin");
-      return;
-    }
-    setProfile(currentUser);
-  };
-  
-  const signout = () => {
-    dispatch(setCurrentUser(null));
-    router.push("./Signin");
-  };
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+   const [profile, setProfile] = useState<any>({});
+ const dispatch = useDispatch();
+ const { currentUser } = useSelector((state: any) => state.accountReducer);
+ const fetchProfile = () => {
+   if (!currentUser) return redirect("/Account/Signin");
+   setProfile(currentUser);
+ };
+ const signout = () => {
+   dispatch(setCurrentUser(null));
+   redirect("/Account/Signin");
+ };
+ useEffect(() => {
+   fetchProfile();
+ }, []);
 
   return (
     <div id="wd-profile-screen">
