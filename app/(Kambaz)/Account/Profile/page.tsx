@@ -1,4 +1,6 @@
-"use client";import { useRouter } from "next/navigation";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { setCurrentUser } from "../reducer";

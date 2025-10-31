@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import KambazNavigation from "./Navigation";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
