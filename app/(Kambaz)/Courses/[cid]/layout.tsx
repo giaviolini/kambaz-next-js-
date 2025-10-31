@@ -17,7 +17,7 @@ export default async function CoursesLayout(
       <hr />
   <div className="d-flex">
     <div className="d-none d-md-block">
-      <CourseNavigation />
+      <CourseNavigation cid={cid}/>
     </div>
     <div className="wd-main-content-offset p-3 flex-fill">
       {children}

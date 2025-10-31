@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Providers from "./Providers";
 import { Geist, Geist_Mono } from "next/font/google";
 //import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,9 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
           {children}
-        </Providers>
       </body>
     </html>
   );
