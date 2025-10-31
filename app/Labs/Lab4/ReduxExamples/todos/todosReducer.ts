@@ -1,49 +1,42 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Define the Todo type
 export interface Todo {
   id: string;
   title: string;
 }
 
-// Define the state type
 interface TodosState {
   todos: Todo[];
-  todo: { title: string };
+  todo: Todo;
 }
 
 const initialState: TodosState = {
-  todos: [
-    { id: "1", title: "Learn React" },
-    { id: "2", title: "Learn Node" },
-  ],
-  todo: { title: "Learn Mongo" },
+  todos: [],
+  todo: { id: "0", title: "" },
 };
 
 const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<{ title: string }>) => {
-      const newTodos = [
-        ...state.todos,
-        { ...action.payload, id: new Date().getTime().toString() },
-      ];
-      state.todos = newTodos;
-      state.todo = { title: "" };
+    addTodo: (state, action) => {
+      const newTodo = {
+        ...action.payload,
+        id: new Date().getTime().toString(),
+      };
+      state.todos = [...state.todos, newTodo];
+      state.todo = { id: "0", title: "" }; // Reset with id
     },
-    deleteTodo: (state, action: PayloadAction<string>) => {
-      const newTodos = state.todos.filter((todo) => todo.id !== action.payload);
-      state.todos = newTodos;
+    deleteTodo: (state, action) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
-    updateTodo: (state, action: PayloadAction<Todo>) => {
-      const newTodos = state.todos.map((item) =>
-        item.id === action.payload.id ? action.payload : item
+    updateTodo: (state, action) => {
+      state.todos = state.todos.map((todo) =>
+        todo.id === action.payload.id ? action.payload : todo
       );
-      state.todos = newTodos;
-      state.todo = { title: "" };
+      state.todo = { id: "0", title: "" }; // Reset with id
     },
-    setTodo: (state, action: PayloadAction<{ title: string }>) => {
+    setTodo: (state, action) => {
       state.todo = action.payload;
     },
   },
