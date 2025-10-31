@@ -1,6 +1,6 @@
 "use client"
 import KambazNavigation from "./Navigation";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard/page";
 import Courses from "./Courses";
 import * as db from "./Database";
@@ -19,7 +19,7 @@ export default function Kambaz() {
   };
   const deleteCourse = (courseId: any) => {
     setCourses(courses.filter((course) => course._id !== courseId));
-  };
+  }; 
   const updateCourse = () => {
     setCourses(
       courses.map((c) => {
@@ -38,7 +38,7 @@ export default function Kambaz() {
         <Routes>
           <Route path="/" element={<Navigate to="Dashboard" />} />
           <Route path="Account" element={<h1>Account</h1>} />
-          <Route path="Dashboard" element={
+         <Route path="Dashboard" element={
             <Dashboard
               courses={courses}
               course={course}
@@ -46,7 +46,7 @@ export default function Kambaz() {
               addNewCourse={addNewCourse}
               deleteCourse={deleteCourse}
               updateCourse={updateCourse}/>
-          } />
+          } /> 
           <Route path="Courses/:cid/*" element={<Courses courses={courses} />} />
         </Routes>
      </div>
