@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from 'express'
 import Hello from "./Hello.js"
 import Lab5 from "./Lab5/index.js";
@@ -6,12 +7,11 @@ import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
 import session from "express-session";
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
-import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js"
 import "dotenv/config";
 const app = express();
 UserRoutes(app);
 app.use(cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",})); 
+    origin: process.env.CLIENT_URL || "http://localhost:4000",})); 
 const sessionOptions = {
         secret: process.env.SESSION_SECRET || "kambaz",
         resave: false,
@@ -25,11 +25,11 @@ const sessionOptions = {
           domain: process.env.SERVER_URL,
         };
       }
+app.use(cors());
 app.use(session(sessionOptions));     
 app.use(express.json());
 UserRoutes(app);
 CourseRoutes(app);
-EnrollmentRoutes(app);
 ModuleRoutes(app);
 Hello(app)
 Lab5(app);

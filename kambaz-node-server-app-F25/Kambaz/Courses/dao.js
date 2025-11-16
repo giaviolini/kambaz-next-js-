@@ -31,5 +31,4 @@ export function updateCourse(courseId, courseUpdates) {
   return course;
 }
 
-
   
