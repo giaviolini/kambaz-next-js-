@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+"use client"; 
+import * as client from "../client";
 import Link from "next/link";
 import { redirect } from "next/dist/client/components/navigation";
 import { setCurrentUser } from "../reducer";
@@ -11,12 +12,8 @@ import { FormControl, Button } from "react-bootstrap";
 export default function Signin() {
   const [credentials, setCredentials] = useState<any>({});
  const dispatch = useDispatch();
- const signin = () => {
-   const user = db.users.find(
-     (u: any) =>
-       u.username === credentials.username &&
-       u.password === credentials.password
-   );
+ const signin = async () => {
+   const user =  await client.signin(credentials);
    if (!user) return;
    dispatch(setCurrentUser(user));
  };
@@ -30,8 +27,7 @@ export default function Signin() {
      <FormControl defaultValue={credentials.password}
              onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
              placeholder="password" type="password" id="wd-password" className="mb-2"/>
-     <Button onClick={signin} id="wd-signin-btn" className="btn btn-primary w-100 mb-2"> 
-     Sign in </Button>
+     <Button onClick={signin} id="wd-signin-btn" className="btn btn-primary w-100 mb-2"> Sign in </Button>
      <Link href="Signup" id="wd-signup-link"> Sign up </Link>
    </div>
 );}
