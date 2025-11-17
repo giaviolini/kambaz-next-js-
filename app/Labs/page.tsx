@@ -7,6 +7,7 @@ export default function Labs() {
   <Provider store={store}>
    <div id="wd-labs">
      <h1>Labs</h1>
+     <h3>By Gia Violini</h3>
      <ul>
        <li>
          <Link href="/Labs/Lab1" id="wd-lab1-link">
