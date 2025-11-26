@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 import { courses } from "../Database";
 import { v4 as uuidv4 } from "uuid";
@@ -24,8 +23,8 @@ const coursesSlice = createSlice({
      ) as any;
    },
    setCourses: (state, { payload: courses }) => {
-    state.courses = courses;
-  },
+     state.courses = courses;
+   },
  },
 });
 export const { addNewCourse, deleteCourse, updateCourse, setCourses } =

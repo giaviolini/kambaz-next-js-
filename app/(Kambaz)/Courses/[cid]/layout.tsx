@@ -1,27 +1,28 @@
-import { ReactNode } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
+import { ReactNode, useState } from "react";
 import CourseNavigation from "./Navigation";
-import Breadcrumb from "./Breadcrumb";
+import { useSelector } from "react-redux";
+import { useParams } from "next/navigation";
 import { FaAlignJustify } from "react-icons/fa";
 import { courses } from "../../Database";
-export default async function CoursesLayout(
-  { children, params }:
-    Readonly<{ children: ReactNode;
-    params: Promise<{ cid: string }> }>) {
- const { cid } = await params;
- const course = courses.find((course) => course._id === cid);
+import Breadcrumb from "./Breadcrumb";
+import { RootState } from "../../store";
+export default function CoursesLayout({ children }: { children: ReactNode }) {
+ const { cid } = useParams();
+ const { courses } = useSelector((state: RootState) => state.coursesReducer);
+ const course = courses.find((course: any) => course._id === cid);
+ const [nav, setNav] = useState(true);
  return (
-  <div id="wd-courses">
-  <h2 className="text-danger">
-      <FaAlignJustify className="me-4 fs-4 mb-1" />
-      <Breadcrumb course={course} /></h2> 
+   <div id="wd-courses">
+     <h2 className="text-danger">
+      <FaAlignJustify className="me-4 fs-4 mb-1" onClick={() => setNav(!nav)}/>
+      {course?.name}
+      </h2>
       <hr />
-  <div className="d-flex">
-    <div className="d-none d-md-block">
-      <CourseNavigation cid={cid}/>
-    </div>
-    <div className="wd-main-content-offset p-3 flex-fill">
-      {children}
-    </div></div>
-</div>
-
+     <div className="d-flex">
+    {nav && (<div className="d-none d-md-block"> <CourseNavigation cid={cid as string}/> </div>)}
+           <div className="flex-fill"> {children} </div>
+      </div>
+   </div>
 );}

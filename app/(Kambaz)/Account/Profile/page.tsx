@@ -1,29 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import * as client from "../client";
 import { redirect } from "next/dist/client/components/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import { Button, FormControl, FormSelect } from "react-bootstrap";
+import * as client from "../client";
+import { RootState } from "../../store";
 export default function Profile() {
    const [profile, setProfile] = useState<any>({});
  const dispatch = useDispatch();
- const { currentUser } = useSelector((state: any) => state.accountReducer);
+ const { currentUser } = useSelector((state: RootState) => state.accountReducer);
  const updateProfile = async () => {
-  const updatedProfile = await client.updateUser(profile);
-  dispatch(setCurrentUser(updatedProfile));
-};
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
+
  const fetchProfile = () => {
    if (!currentUser) return redirect("/Account/Signin");
    setProfile(currentUser);
  };
- const signout = async () => { 
-   await client.signout();
+ const signout = async () => {
+  await client.signout();
    dispatch(setCurrentUser(null));
    redirect("/Account/Signin");
  };
- useEffect(() => {fetchProfile();}, []);
+ useEffect(() => {
+   fetchProfile();
+ }, []);
 
   return (
     <div id="wd-profile-screen">
@@ -55,7 +60,9 @@ export default function Profile() {
         <option value="FACULTY">Faculty</option> <option value="STUDENT">Student</option>
       </FormSelect>
       <button onClick={updateProfile} className="btn btn-primary w-100 mb-2"> Update </button>
-      <button onClick={signout} className="w-100 mb-2" id="wd-signout-btn"> Sign out</button>
+      <Button onClick={signout} className="w-100 mb-2" id="wd-signout-btn">
+           Sign out
+         </Button>
       </div>
      )}
     </div>

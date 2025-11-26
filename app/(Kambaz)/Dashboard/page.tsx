@@ -1,36 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import Link from "next/link";
-import * as client from "../Courses/client"
+import * as client from "../Courses/client";
 import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, FormControl, Row } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewCourse, deleteCourse, updateCourse, setCourses } from "../Courses/reducer";
+import { RootState } from "../store";
 export default function Dashboard() {
-  const { courses } = useSelector((state: any) => state.coursesReducer);
+  const { courses } = useSelector((state: RootState) => state.coursesReducer);
   const dispatch = useDispatch();
   const [course, setCourse] = useState<any>({
     _id: "0", name: "New Course", number: "New Number",
     startDate: "2023-09-10", endDate: "2023-12-15",
     image: "/images/reactjs.jpg", description: "New Description"
   });
-
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
-  const fetchCourses = async () => {
-    try {
-      const courses = await client.findMyCourses();
-      dispatch(setCourses(courses));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {fetchCourses();}, [currentUser]);
-
-  if (!currentUser) {
-    return <div>Loading...</div>;
-  }
-  
   const onAddNewCourse = async () => {
     const newCourse = await client.createCourse(course);
     dispatch(setCourses([ ...courses, newCourse ]));
@@ -41,25 +29,51 @@ export default function Dashboard() {
     dispatch(setCourses(courses.filter((course: { _id: string; }) => course._id !== courseId)));
   };
 
+  const onUpdateCourse = async () => {
+    await client.updateCourse(course);
+    dispatch(setCourses(courses.map((c: { _id: any; }) => {
+        if (c._id === course._id) { return course; }
+        else { return c; }
+    })));};
+
+
+  const fetchCourses = async () => {
+    try {
+      const courses = await client.findMyCourses();
+      dispatch(setCourses(courses));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+
+
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
 
       <h5>New Course
-          <button className="btn btn-primary float-end" id="wd-add-new-course-click" onClick={onAddNewCourse} > Add </button>
-          <button className="btn btn-warning float-end me-2" onClick={() => dispatch(updateCourse(course))} id="wd-update-course-click"> Update </button>
+          <button className="btn btn-primary float-end"
+                  id="wd-add-new-course-click"
+                  onClick={onAddNewCourse} > Add </button>
+                  <button className="btn btn-warning float-end me-2"
+                onClick={onUpdateCourse} id="wd-update-course-click">
+          Update </button>
       </h5><hr /><br />
 
       <FormControl value={course.name} className="mb-2"
         onChange={(e) => setCourse({ ...course, name: e.target.value }) } />
-      <FormControl as="textarea" value={course.description} rows={3}
+      <FormControl value={course.description} as="textarea"
         onChange={(e) => setCourse({ ...course, description: e.target.value }) } />
 
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-        {courses.map((course: any) => (
-            <Col key={course._id} className="wd-dashboard-course" style={{ width: "300px" }}>
+          {courses.map((course: { _id: string; name: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
+            // eslint-disable-next-line react/jsx-key
+            <Col className="wd-dashboard-course" style={{ width: "300px" }}>
               <Card>
                 <Link href={`/Courses/${course._id}/Home`}
                       className="wd-dashboard-course-link text-decoration-none text-dark" >
@@ -84,7 +98,9 @@ export default function Dashboard() {
                       }}
                       className="btn btn-warning me-2 float-end" >
                       Edit
-                    </Button>        
+                    </Button>
+
+            
                   </CardBody>
                 </Link>
               </Card>
@@ -92,5 +108,4 @@ export default function Dashboard() {
           ))}
         </Row>
       </div>
-    </div>
-);}
+    </div>);}
