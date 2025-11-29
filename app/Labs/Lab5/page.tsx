@@ -7,7 +7,7 @@ import WorkingWithArrays from "./WorkingWithArrays";
 import WorkingWithArraysAsynchronously from "./WorkingWithArraysAsynchronously";
 import WorkingWithObjects from "./WorkingWithObjects";
 import WorkingWithObjectsAsynchronously from "./WorkingWithObjectsAsynchronously";
-const HTTP_SERVER = process.env.VITE_REMOTE_SERVER;
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 export default function Lab5() {
     return (
       <div id="wd-lab5">
@@ -23,7 +23,7 @@ export default function Lab5() {
         <QueryParameters />
         <WorkingWithObjects />
         <WorkingWithArrays/>
-        {/* <HttpClient/> */}
+        <HttpClient/>
         <WorkingWithObjectsAsynchronously/>
         <WorkingWithArraysAsynchronously />
       </div>

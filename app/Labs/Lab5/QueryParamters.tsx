@@ -1,7 +1,7 @@
 "use client";
 import { FormControl } from "react-bootstrap";
 import React, { useState } from 'react';
-const HTTP_SERVER = process.env.VITE_REMOTE_SERVER;
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 
 export default function QueryParameters() {
     const [a, setA] = useState("34");
