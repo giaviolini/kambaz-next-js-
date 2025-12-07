@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
+interface User {
+  id: string;
+  name: string;
+  role: string;
+}
+interface AccountState {
+  currentUser: User | null;
+}
+const initialState: AccountState = {
   currentUser: null,
 };
 const accountSlice = createSlice({

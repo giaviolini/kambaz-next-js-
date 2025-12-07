@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 const HTTP_SERVER = process.env.VITE_REMOTE_SERVER;
 const MODULES_API = `${HTTP_SERVER}/api/modules`;
