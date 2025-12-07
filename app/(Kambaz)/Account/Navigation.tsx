@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Nav, NavItem, NavLink } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { RootState } from "../store";
 export default function AccountNavigation() {
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountReducer);
   const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
  const pathname = usePathname();
  return (
@@ -15,5 +15,7 @@ export default function AccountNavigation() {
          <NavLink as={Link} href={link} active={pathname.endsWith(link.toLowerCase())}>
            {link} </NavLink> </NavItem>
      ))}
+     {currentUser && currentUser.role === "ADMIN" && (
+       <NavLink as={Link} href={`/Account/Users`}  active={pathname.endsWith('Users')}> Users </NavLink> )}
    </Nav>
 );}
