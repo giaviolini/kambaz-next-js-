@@ -40,13 +40,18 @@ export const createUser = async (user: any) => {
   return response.data;
 };
 
-export const signin = async (credentials: any) => {
+interface Credentials {
+  username: string;
+  password: string;
+}
+
+export const signin = async (credentials: Credentials) => {
   const response = await axiosWithCredentials.post(`${USERS_API}/signin`, credentials);
   return response.data;
 };
 
 export const profile = async () => {
-  const response = await axiosWithCredentials.post(`${USERS_API}/profile`); 
+  const response = await axiosWithCredentials.post(`${USERS_API}/profile`);
   return response.data;
 };
 
