@@ -8,7 +8,7 @@ export const joinUrl = (base: string, path: string) => {
   return base.replace(/\/$/, "") + "/" + path.replace(/^\//, "");
 };
 
-export const USERS_API = `${HTTP_SERVER}/api/users`;
+export const USERS_API = joinUrl(HTTP_SERVER!, "/api/users");
 
 export const findAllUsers = async () => {
   const response = await axiosWithCredentials.get(USERS_API);
