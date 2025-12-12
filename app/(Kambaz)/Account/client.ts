@@ -73,12 +73,12 @@ export interface Credentials {
 }
 
 export const signin = async (credentials: Credentials) => {
-  console.log("✨ Sending signin:", credentials);
+  console.log("Sending signin:", credentials);
   const { data } = await axiosWithCredentials.post(
     `${USERS_API}/signin`,
     credentials
   );
-  console.log("✨ Signin response:", data);
+  console.log("Signin response:", data);
   return data;
 };
 
