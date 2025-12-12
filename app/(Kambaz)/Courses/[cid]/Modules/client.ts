@@ -1,14 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
-const HTTP_SERVER = process.env.VITE_REMOTE_SERVER;
-const MODULES_API = `${HTTP_SERVER}/api/modules`;
-export const deleteModule = async (moduleId: string) => {
- const response = await axios.delete(`${MODULES_API}/${moduleId}`);
- return response.data; 
+
+const axiosWithCredentials = axios.create({ withCredentials: true });
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
+
+const COURSES_API = `${HTTP_SERVER}/api/courses`;
+
+// Delete a module for a specific course
+export const deleteModule = async (courseId: string, moduleId: string) => {
+  const { data } = await axiosWithCredentials.delete(
+    `${COURSES_API}/${courseId}/modules/${moduleId}`
+  );
+  return data;
 };
-export const updateModule = async (module: any) => {
-    const { data } = await axios.put(`${MODULES_API}/${module._id}`, module);
-    return data;
+
+// Update a module for a specific course
+export const updateModule = async (courseId: string, module: any) => {
+  const { data } = await axiosWithCredentials.put(
+    `${COURSES_API}/${courseId}/modules/${module._id}`,
+    module
+  );
+  return data;
 };
+
+// Create a module for a specific course
+export const createModuleForCourse = async (courseId: string, module: any) => {
+  const { data } = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/modules`,
+    module
+  );
+  return data;
+};
+
+// Fetch all modules for a course
+export const findModulesForCourse = async (courseId: string) => {
+  const { data } = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/modules`
+  );
+  return data;
+};
+
   
 
