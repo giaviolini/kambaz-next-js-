@@ -19,7 +19,7 @@ export const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 
 // Safety check
 if (!HTTP_SERVER) {
-  console.error("❌ Missing NEXT_PUBLIC_HTTP_SERVER environment variable");
+  console.error("Missing NEXT_PUBLIC_HTTP_SERVER environment variable");
 }
 
 /**
