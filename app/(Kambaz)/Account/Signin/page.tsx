@@ -7,17 +7,19 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { FormControl, Button } from "react-bootstrap";
 import * as client from "../client";
+import { useRouter } from "next/navigation";
 
 export default function Signin() {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const signinHandler = async () => {
     try {
       const user = await client.signin(credentials);
       if (!user) return;
       dispatch(setCurrentUser(user));
-      redirect("/Dashboard");
+      router.push("/Dashboard");
     } catch (err: any) {
       console.error("Signin error:", err.response?.data || err.message);
       alert("Signin failed: " + (err.response?.data?.message || err.message));
