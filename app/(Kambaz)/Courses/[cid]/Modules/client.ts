@@ -16,9 +16,12 @@ export const deleteModule = async (courseId: string, moduleId: string) => {
 
 // Update a module for a specific course
 export const updateModule = async (courseId: string, module: any) => {
-    const { data } = await axios.put(`${COURSES_API}/${courseId}/modules/${module._id}`, module);
-    return data;
-  };
+  const { data } = await axiosWithCredentials.put(
+    `${COURSES_API}/${courseId}/modules/${module._id}`,
+    module
+  );
+  return data;
+};
 
 // Create a module for a specific course
 export const createModuleForCourse = async (courseId: string, module: any) => {
@@ -29,13 +32,14 @@ export const createModuleForCourse = async (courseId: string, module: any) => {
   return data;
 };
 
-// Fetch all modules for a course
+// Find modules for a specific course
 export const findModulesForCourse = async (courseId: string) => {
   const { data } = await axiosWithCredentials.get(
     `${COURSES_API}/${courseId}/modules`
   );
   return data;
 };
+
 
   
 
