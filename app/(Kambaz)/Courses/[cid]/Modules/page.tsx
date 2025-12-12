@@ -5,7 +5,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import * as client from "../../client";
+import * as client from "./client";
 import * as db from "../../../Database";
 import { FormControl, ListGroup, ListGroupItem } from "react-bootstrap";
 import ModulesControls from "./ModulesControls";
