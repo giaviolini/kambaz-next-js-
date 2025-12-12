@@ -42,8 +42,6 @@ export default function AssignmentEditor() {
     dispatch(setAssignments(newAssignments));
   };
 
-
-
   const handleSave = async () => {
     if (current) {
      await onUpdateAssignment(assignment);
