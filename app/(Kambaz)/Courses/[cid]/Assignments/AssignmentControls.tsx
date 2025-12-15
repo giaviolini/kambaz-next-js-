@@ -16,7 +16,7 @@ export default function AssignmentControls() {
     </InputGroup>
     <AssignmentLink 
       cid={cid} 
-      assignmentId={assignments[0]._id}
+      assignmentId="new"
       className="wd-assignment-link text-decoration-none">
       <Button variant="danger" size="lg" className="me-1 float-end" id="wd-edit-assignment-btn">
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
