@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import * as client from "../Courses/client";
 import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, FormControl, Row } from "react-bootstrap";
@@ -26,12 +26,12 @@ export default function Dashboard() {
 
   const onDeleteCourse = async (courseId: string) => {
     const status = await client.deleteCourse(courseId);
-    dispatch(setCourses(courses.filter((course: { _id: string; }) => course._id !== courseId)));
+    dispatch(setCourses(courses.filter((course) => course._id !== courseId)));
   };
 
   const onUpdateCourse = async () => {
     await client.updateCourse(course);
-    dispatch(setCourses(courses.map((c: { _id: any; }) => {
+    dispatch(setCourses(courses.map((c) => {
         if (c._id === course._id) { return course; }
         else { return c; }
     })));};
@@ -46,13 +46,20 @@ export default function Dashboard() {
     }
   };
   useEffect(() => {
+    if (currentUser && currentUser._id) {
     fetchCourses();
-  }, [currentUser]);
+  }
+}, [currentUser]);
 
 
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+
+      <Link href={`/Enrollment`} className="btn btn-primary me-2" >
+        Enroll in a Course</Link> 
+      <Link href={`/Unenrollment`} className="btn btn-primary" >
+        Unenroll from a Course</Link> <hr /><br />
 
       <h5>New Course
           <button className="btn btn-primary float-end"
@@ -71,7 +78,7 @@ export default function Dashboard() {
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
-          {courses.map((course: { _id: string; name: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
+          {courses.map((course) => (
             // eslint-disable-next-line react/jsx-key
             <Col className="wd-dashboard-course" style={{ width: "300px" }}>
               <Card>
